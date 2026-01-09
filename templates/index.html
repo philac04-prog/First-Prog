@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <tiltle>User List</tiltle>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="header">
+        <h2>User Manager</h2>
+        <a href="/logout" style="float:right; color:red;">Logout</a>
+    </div>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for msg in messages %}
+                     <li class="message">{{ msg }}</li>
+                {% endfor %}            
+            </ul>
+        {% endif %}
+    {% endwith %}        
+    <h1>Hello Quang</h1>
+    <form method="POST">
+        <input type="text" name="username" placeholder=" Nhap Ten">
+        <button type="Submit">Send</button>
+    </form>
+    <hr>
+    <h2>Danh sach user</h2>
+    <ul>
+        {% for user in users %}
+           <liv>
+             <span>{{ user.name }}</span>
+             <span>
+                <a href="/edit/{{ user.id }}">Edit</a>
+                <a href="/delete/{{ user.id }}"
+                   class="delete"
+                   onclick="return confirm('Ban Co chac Muon Xoa?')">X</a>
+             </span>
+           </liv>
+        {% endfor %}
+    </ul>
+</body>
+</html>
