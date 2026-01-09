@@ -13,7 +13,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
+    name = db.Column(db.String(100), nullable=False)
 def login_required():
     if "user" not in session:
         return False
@@ -71,3 +71,5 @@ def logout():
     return redirect("/login")
 if __name__ == "__main__":
     app.run(debug=False)
+with app.app_context():
+    db.create_all()
